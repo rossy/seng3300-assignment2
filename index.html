@@ -34,7 +34,13 @@ core-toolbar {
 <body>
 	<core-header-panel>
 		<core-toolbar>
-			Get Directions
+				<core-toolbar>
+			<core-toolbar id="mainheader">
+      			<paper-icon-button id="navicon"
+			 icon="arrow-back"></paper-icon-button>
+			<span flex>Get Directions</span>
+      			<paper-icon-button id="searchbutton" icon="search"></paper-icon-button>
+			</core-toolbar>
 		</core-toolbar>
 		<google-map id="my-map" disableDefaultUI fit></google-map>
 	</core-header-panel>
