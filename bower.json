@@ -19,6 +19,7 @@
     "core-header-panel": "Polymer/core-header-panel#~0.5.6",
     "core-icon-button": "Polymer/core-icon-button#~0.5.6",
     "core-toolbar": "Polymer/core-toolbar#~0.5.6",
-    "core-icons": "Polymer/core-icons#~0.5.6"
+    "core-icons": "Polymer/core-icons#~0.5.6",
+    "paper-icon-button": "Polymer/paper-icon-button#~0.5.6"
   }
 }
