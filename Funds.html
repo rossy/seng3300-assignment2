@@ -12,6 +12,11 @@
 	<link rel="import" href="bower_components/core-icons/core-icons.html">
 	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 	  <link href="bower_components/paper-dropdown/paper-dropdown.html" rel="import">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link href="bower_components/paper-item/paper-item.html" rel="import">
+<link rel="import" href="bower_components/core-menu/core-menu.html">
+<link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
 	<style>
 
 html, body {
@@ -45,16 +50,64 @@ core-toolbar {
       text-overflow: ellipsis;
     }
 
+
+    section {
+      padding: 20px 0;
+    }
+    section > div {
+      padding: 14px;
+      font-size: 16px;
+    }
+
+    paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
+      color: #4285f4;
+    }
+    
+    paper-radio-group.blue paper-radio-button::shadow #onRadio {
+      background-color: #4285f4;
+    }
+
+    paper-radio-group.blue paper-radio-button[checked]::shadow #offRadio {
+      border-color: #4285f4;
+    }
+    
+    paper-radio-button {
+      display: block;
+    }
+
+
+    paper-button.colored {
+      color: #4285f4;
+    }
+
+    paper-button[raised].colored {
+      background: #4285f4;
+      color: #fff;
+    }
+
+    paper-button.custom > core-icon {
+      margin-right: 4px;
+    }
+
+    paper-button.hover:hover {
+      background: #eee;
+    }
+
+    paper-button.blue-ripple::shadow #ripple {
+      color: #4285f4;
+    }
 	</style>
 </head>
 <body>
 	<core-header-panel>
 			<core-toolbar id="mainheader">
-        <paper-icon-button id="navicon" icon="arrow-back"></paper-icon-button>
+        <paper-icon-button id="navicon"  icon="arrow-back">	
+<a href="../index.html" >d </a>
+			</paper-icon-button>
 			  <span flex>Add Funds</span>
 			</core-toolbar>
 		<div vertical layout>
-  <div>Balance</div>
+  <div>Balance		$ 0</div>
   <div>
   	<paper-dropdown-menu label="Select an amount">
         <paper-dropdown class="dropdown">
@@ -67,8 +120,11 @@ core-toolbar {
         </paper-dropdown>
       </paper-dropdown-menu>
   </div>
-  <div>Three</div>
+  <div><paper-radio-group class="blue" selected="auto">
+      <paper-radio-button name="credit" label="Master Card ending with **994"></paper-radio-button>
+          </paper-radio-group></div>
 </div>
+<div><paper-button raised class="colored">Add New Payment Method</paper-button></div>
 	</core-header-panel>
 </body>
 </html>
