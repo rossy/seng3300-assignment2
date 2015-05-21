@@ -4,6 +4,8 @@
 <link rel="import" href="bower_components/core-menu/core-menu.html">
 <link rel="import" href="bower_components/core-item/core-item.html">
 <link rel="import" href="bower_components/core-icons/core-icons.html">
+<link rel="import" href="bower_components/core-icons/maps-icons.html">
+<link rel="import" href="bower_components/core-icons/editor-icons.html">
 <link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
 <link rel="import" href="bower_components/google-map/google-map.html">
 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
@@ -32,24 +34,135 @@ core-toolbar {
 	background: #fafafa;
 }
 
+#routes-panel {
+	overflow: auto;
+	padding-top: 60vh;
+}
+
+#routes-panel::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+#routes-list {
+	background: #fafafa;
+}
+
 	</style>
 	<core-drawer-panel id="drawer-panel" flex>
 		<div drawer layout vertical>
 			<div id="header"></div>
-			<core-menu>
-				<core-item icon="settings" label="item1"></core-item>
-				<core-item icon="settings" label="item2"></core-item>
+			<core-menu selected="directions" on-core-select="{{menuSelected}}">
+				<core-item name="directions" icon="maps:directions" label="Get directions"></core-item>
+				<core-item name="statistics" icon="editor:insert-chart" label="Statistics"></core-item>
+				<core-item name="funds" icon="payment" label="Add funds"></core-item>
 			</core-menu>
 		</div>
 		<core-header-panel main>
-			<paper-shadow z="1">
-				<core-toolbar>
-					<paper-icon-button icon="menu" on-tap="{{togglePanel}}"></paper-icon-button>
-					<span flex>Get directions</span>
-					<paper-icon-button icon="search"></paper-icon-button>
-				</core-toolbar>
-			</paper-shadow>
-			<google-map id="my-map" latitude="37.77493" longitude="-122.41942" disableDefaultUI fit></google-map>
+			<core-toolbar>
+				<paper-icon-button id="menu-button" icon="menu" on-tap="{{togglePanel}}"></paper-icon-button>
+				<span id="directions-label" flex>Get directions</span>
+				<paper-icon-button id="search-button" icon="search" on-tap="{{toggleSearch}}"></paper-icon-button>
+			</core-toolbar>
+			<google-map id="map"
+			            latitude="-32.8955255"
+			            longitude="151.6944619"
+			            zoom="14"
+			            disableDefaultUI
+			            noAutoTilt
+			            on-google-map-ready="{{mapReady}}"
+			            fit>
+			</google-map>
+			<div id="routes-panel" fit layout vertical>
+				<paper-shadow z="1">
+					<div id="routes-list">
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+blah<br>
+					</div>
+				</paper-shadow>
+			</div>
 		</div>
 	</core-drawer-panel>
 </template>
@@ -59,8 +172,47 @@ core-toolbar {
 	"use strict";
 
 	Polymer("directions-page", {
-		togglePanel: function() {
+		ready: function ready() {
+		},
+		menuSelected: function menuSelected(e, detail) {
+			if (!detail.isSelected)
+				return;
+
+			switch (detail.item.getAttribute("name")) {
+				case "statistics":
+					window.location.href = "statistics.html";
+					break;
+				case "funds":
+					window.location.href = "Funds.html";
+					break;
+			}
+		},
+		togglePanel: function togglePanel() {
 			this.$["drawer-panel"].togglePanel();
+		},
+		toggleSearch: function toggleSearch() {
+
+		},
+		mapReady: function mapReady() {
+			this.map = this.$["map"].map;
+
+			var pathCoords = [
+				new google.maps.LatLng(-32.902948, 151.676802),
+				new google.maps.LatLng(-32.905002, 151.691029),
+				new google.maps.LatLng(-32.905741, 151.692209),
+				new google.maps.LatLng(-32.901381, 151.693604),
+				new google.maps.LatLng(-32.892841, 151.695599),
+			];
+
+			var path = new google.maps.Polyline({
+				path: pathCoords,
+				geodesic: true,
+				strokeColor: '#2962FF',
+				strokeOpacity: 0.9,
+				strokeWeight: 4,
+			});
+
+			path.setMap(this.map);
 		},
 	});
 })();
