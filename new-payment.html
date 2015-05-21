@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="theme-color" content="#999999">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+	<script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+	<link rel="import" href="bower_components/font-roboto/roboto.html">
+	<link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+	<link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+	<link rel="import" href="bower_components/google-map/google-map.html">
+	<link rel="import" href="bower_components/core-icons/core-icons.html">
+	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+	  <link href="bower_components/paper-dropdown/paper-dropdown.html" rel="import">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link href="bower_components/paper-item/paper-item.html" rel="import">
+<link rel="import" href="bower_components/core-menu/core-menu.html">
+<link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/core-input/core-input.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+
+  <style>
+
+html, body {
+	height: 100vh;
+	margin: 0;
+	background-color: #E5E5E5;
+	font-family: 'RobotoDraft', sans-serif;
+}
+
+core-header-panel {
+	height: 100vh;
+	overflow: auto;
+
+	-webkit-overflow-scrolling: touch;
+}
+
+core-toolbar {
+	background: #03a9f4;
+	color: white;
+}
+
+    .dropdown.colored::shadow #ripple,
+    .dropdown.colored::shadow #background {
+      border: 1px solid #0f9d58;
+      background-color: #b7e1cd;
+    }
+    
+    
+    paper-item {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+
+    section {
+      padding: 20px 0 ;
+    }
+    section > div {
+      padding: 14px;
+      font-size: 16px;
+    }
+
+    paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
+      color: #4285f4;
+    }
+    
+    paper-radio-group.blue paper-radio-button::shadow #onRadio {
+      background-color: #4285f4;
+    }
+
+    paper-radio-group.blue paper-radio-button[checked]::shadow #offRadio {
+      border-color: #4285f4;
+    }
+    
+    paper-radio-button {
+      display: block;
+    }
+
+
+    paper-button.colored {
+      color: #4285f4;
+    }
+
+    paper-button[raised].colored {
+      background: #4285f4;
+      color: #fff;
+    }
+
+    paper-button.custom > core-icon {
+      margin-right: 4px;
+    }
+
+    paper-button.hover:hover {
+      background: #eee;
+    }
+
+    paper-button.blue-ripple::shadow #ripple {
+      color: #4285f4;
+    }
+	</style>
+</head>
+<body>
+	<core-header-panel>
+			<core-toolbar id="mainheader">
+        <paper-icon-button id="navicon"  icon="arrow-back">	
+			</paper-icon-button>
+        <span flex>New Payment Method</span>
+      </core-toolbar>
+
+    <div id="divNew" vertical layout>
+      <div>
+        <paper-dropdown-menu label="Payment type">
+          <paper-dropdown class="dropdown">
+            <core-menu class="menu">
+                <paper-item id="btnCC">Credit Card</paper-item>
+                <paper-item id="btnPP">Paypal</paper-item>
+            </core-menu>
+          </paper-dropdown>
+        </paper-dropdown-menu>
+      </div>
+      <div id="divPaypal" hidden="hidden"> 
+        <div>
+          <paper-input label="Username" floatingLabel></paper-input>
+        </div>
+        <div>
+          <paper-input label="Password"  floatingLabel></paper-input>
+        </div>
+      </div>
+      <div id="divCredit" hidden="hidden">
+
+      <div >
+        <paper-input label="Name" floatingLabel></paper-input>
+      </div>
+      <div>        
+        <paper-input label="Card Number" floatingLabel></paper-input>
+      </div>
+      <div>        
+        <paper-dropdown-menu label="Expiry Month">
+          <paper-dropdown class="dropdown">
+            <core-menu class="menu">
+                <paper-item>Jan</paper-item>
+                <paper-item>Feb</paper-item>
+                <paper-item>Mar</paper-item>
+                <paper-item>Apr</paper-item>
+                <paper-item>May</paper-item>
+                <paper-item>Jun</paper-item>
+                <paper-item>Jul</paper-item>
+                <paper-item>Aug</paper-item>
+                <paper-item>Sep</paper-item>
+                <paper-item>Oct</paper-item>
+                <paper-item>Nov</paper-item>
+                <paper-item>Dec</paper-item>
+            </core-menu>
+          </paper-dropdown>
+        </paper-dropdown-menu>
+        <paper-dropdown-menu label="Expiry Year">
+          <paper-dropdown class="dropdown">
+            <core-menu class="menu">
+                <paper-item>15</paper-item>
+                <paper-item>16</paper-item>
+                <paper-item>17</paper-item>
+                <paper-item>18</paper-item>
+                <paper-item>19</paper-item>
+                <paper-item>20</paper-item>
+                <paper-item>21</paper-item>
+            </core-menu>
+          </paper-dropdown>
+        </paper-dropdown-menu>
+      </div>
+      <div>
+        <paper-input label="Security Code" floatingLabel></paper-input>
+      </div>
+   
+    </div>
+       <div>
+        <paper-button raised id="btnSave" class="colored">Save</paper-button>
+      </div>
+    </div>
+	</core-header-panel>
+  
+  <script type="text/javascript">
+
+      document.addEventListener('polymer-ready', function() {
+      var btnCC = document.getElementById('btnCC');
+      var btnPP = document.getElementById('btnPP');
+      var divCredit = document.getElementById('divCredit');
+      var divPaypal = document.getElementById('divPaypal');
+      btnCC.addEventListener('click', function() {
+        divCredit.hidden = "";
+        divPaypal.hidden = "hidden";
+      });
+      btnPP.addEventListener('click', function() {
+        divCredit.hidden = "hidden";
+        divPaypal.hidden = "";
+      });
+     
+      
+    });
+  </script>
+</body>
+</html>
