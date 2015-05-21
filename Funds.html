@@ -17,7 +17,10 @@
 <link rel="import" href="bower_components/core-menu/core-menu.html">
 <link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
 <link rel="import" href="bower_components/paper-button/paper-button.html">
-	<style>
+<link rel="import" href="bower_components/core-input/core-input.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+
+  <style>
 
 html, body {
 	height: 100vh;
@@ -29,6 +32,7 @@ html, body {
 core-header-panel {
 	height: 100vh;
 	overflow: auto;
+
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -52,7 +56,7 @@ core-toolbar {
 
 
     section {
-      padding: 20px 0;
+      padding: 20px 0 ;
     }
     section > div {
       padding: 14px;
@@ -102,29 +106,54 @@ core-toolbar {
 	<core-header-panel>
 			<core-toolbar id="mainheader">
         <paper-icon-button id="navicon"  icon="arrow-back">	
-<a href="../index.html" >d </a>
 			</paper-icon-button>
 			  <span flex>Add Funds</span>
 			</core-toolbar>
-		<div vertical layout>
-  <div>Balance		$ 0</div>
-  <div>
-  	<paper-dropdown-menu label="Select an amount">
-        <paper-dropdown class="dropdown">
-          <core-menu class="menu">
-              <paper-item>$ 20</paper-item>
-              <paper-item>$ 40</paper-item>
-              <paper-item>$ 60</paper-item>
-              <paper-item>$ 80</paper-item>
-          </core-menu>
-        </paper-dropdown>
-      </paper-dropdown-menu>
-  </div>
-  <div><paper-radio-group class="blue" selected="auto">
-      <paper-radio-button name="credit" label="Master Card ending with **994"></paper-radio-button>
-          </paper-radio-group></div>
-</div>
-<div><paper-button raised class="colored">Add New Payment Method</paper-button></div>
+		<div id="divAdd" vertical layout>
+      <div>Balance		$ 0</div>
+      <div>
+      	<paper-dropdown-menu label="Select an amount">
+            <paper-dropdown class="dropdown">
+              <core-menu class="menu">
+                  <paper-item>$ 20</paper-item>
+                  <paper-item>$ 40</paper-item>
+                  <paper-item>$ 60</paper-item>
+                  <paper-item>$ 80</paper-item>
+              </core-menu>
+            </paper-dropdown>
+          </paper-dropdown-menu>
+      </div>
+      <div>
+        <paper-radio-group class="blue" selected="auto">
+           <paper-radio-button name="credit" label="Master Card ending with **994"></paper-radio-button>
+        </paper-radio-group></div>
+      </div>
+      <div>
+        <paper-button raised id="btnNew" class="colored">Add New Payment Method</paper-button>
+      </div>
+      <div>
+        <paper-button raised class="colored">Add funds</paper-button>
+      </div>
+    </div>
+       <div>
+        <paper-button raised id="btnSave" class="colored">Save</paper-button>
+      </div>
+    </div>
 	</core-header-panel>
+  
+  <script type="text/javascript">
+
+      document.addEventListener('polymer-ready', function() {
+
+
+      document.getElementById('btnNew').addEventListener('click', function() {
+       window.location.href = "new-payment.html";
+      });
+
+      
+      
+      
+    });
+  </script>
 </body>
 </html>
