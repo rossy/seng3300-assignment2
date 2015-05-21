@@ -111,7 +111,7 @@ core-toolbar {
 			  <span flex>Add Funds</span>
 			</core-toolbar>
 		<div id="divAdd" vertical layout>
-      <div>Balance		$ 0</div>
+      <div>Balance<div id="balance"> $ 0</div></div>
       <div>
       	<paper-dropdown-menu label="Select an amount">
             <paper-dropdown class="dropdown">
@@ -127,8 +127,6 @@ core-toolbar {
       <div>
         <paper-radio-group class="blue" id="methods" selected="auto">
            <paper-radio-button name="credit" label="Master Card ending with **994"></paper-radio-button>
-            <paper-radio-button name="credit2" label="Master sssCard ending with **994">
-          </paper-radio-button>
         </paper-radio-group></div>
       </div>
       <div>
@@ -152,18 +150,15 @@ core-toolbar {
       var type = sessionStorage["type"];
       if (type == "paypal")
       {
-      var methods = document.getElementById('methods')
+        var methods = document.getElementById('methods')
         var newMethod = document.createElement('paper-radio-button');
-       newMethod.name = "paypal";
+        newMethod.name = "paypal";
         newMethod.label = "PayPal";
         methods.appendChild(newMethod);        
 
       }
 
-
       document.getElementById('btnNew').addEventListener('click', function() { 
-      
-
       window.location.href = "new-payment.html";
 
       });

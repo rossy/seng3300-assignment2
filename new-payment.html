@@ -128,6 +128,9 @@ core-toolbar {
         <div>
           <paper-input label="Password"  floatingLabel></paper-input>
         </div>
+               <div>
+        <paper-button raised id="btnSavePaypal" class="colored">Save</paper-button>
+      </div>
       </div>
       <div id="divCredit" hidden="hidden">
 
@@ -173,11 +176,11 @@ core-toolbar {
       <div>
         <paper-input label="Security Code" floatingLabel></paper-input>
       </div>
-   
-    </div>
-       <div>
-        <paper-button raised id="btnSave" class="colored">Save</paper-button>
+      <div>
+        <paper-button raised id="btnSaveCredit" class="colored">Save</paper-button>
       </div>
+    </div>
+
     </div>
 	</core-header-panel>
   
@@ -197,8 +200,13 @@ core-toolbar {
         divPaypal.hidden = "";
       });
 
-            document.getElementById('btnSave').addEventListener('click', function() {
+            document.getElementById('btnSavePaypal').addEventListener('click', function() {
               sessionStorage["type"]="paypal";
+              window.location.href = "Funds.html";
+            });
+
+            document.getElementById('btnSaveCredit').addEventListener('click', function() {
+              sessionStorage["type"]="credit";
               window.location.href = "Funds.html";
 
       });
