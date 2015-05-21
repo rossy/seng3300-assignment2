@@ -23,6 +23,18 @@ core-toolbar {
 	color: white;
 }
 
+#slide-menu {
+	margin: 12px 0;
+}
+
+#slide-menu > core-item {
+	padding: 0 12px;
+}
+
+#slide-menu > core-item.core-selected {
+	background: #E0E0E0;
+}
+
 #header {
 	height: 150px;
 	background-image: url(header.png);
@@ -52,7 +64,7 @@ core-toolbar {
 	<core-drawer-panel id="drawer-panel" flex>
 		<div drawer layout vertical>
 			<div id="header"></div>
-			<core-menu selected="directions" on-core-select="{{menuSelected}}">
+			<core-menu id="slide-menu" selected="directions" on-core-select="{{menuSelected}}">
 				<core-item name="directions" icon="maps:directions" label="Get directions"></core-item>
 				<core-item name="statistics" icon="editor:insert-chart" label="Statistics"></core-item>
 				<core-item name="funds" icon="payment" label="Add funds"></core-item>
