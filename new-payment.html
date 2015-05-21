@@ -102,7 +102,7 @@ core-toolbar {
     }
 	</style>
 </head>
-<body>
+<body unresolved>
 	<core-header-panel>
 			<core-toolbar id="mainheader">
         <paper-icon-button id="navicon"  icon="arrow-back">	
@@ -196,7 +196,12 @@ core-toolbar {
         divCredit.hidden = "hidden";
         divPaypal.hidden = "";
       });
-     
+
+            document.getElementById('btnSave').addEventListener('click', function() {
+              sessionStorage["type"]="paypal";
+              window.location.href = "Funds.html";
+
+      });
       
     });
   </script>

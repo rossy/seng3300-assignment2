@@ -19,6 +19,7 @@
 <link rel="import" href="bower_components/paper-button/paper-button.html">
 <link rel="import" href="bower_components/core-input/core-input.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
 
   <style>
 
@@ -102,7 +103,7 @@ core-toolbar {
     }
 	</style>
 </head>
-<body>
+<body unresolved>
 	<core-header-panel>
 			<core-toolbar id="mainheader">
         <paper-icon-button id="navicon"  icon="arrow-back">	
@@ -124,8 +125,10 @@ core-toolbar {
           </paper-dropdown-menu>
       </div>
       <div>
-        <paper-radio-group class="blue" selected="auto">
+        <paper-radio-group class="blue" id="methods" selected="auto">
            <paper-radio-button name="credit" label="Master Card ending with **994"></paper-radio-button>
+            <paper-radio-button name="credit2" label="Master sssCard ending with **994">
+          </paper-radio-button>
         </paper-radio-group></div>
       </div>
       <div>
@@ -135,23 +138,35 @@ core-toolbar {
         <paper-button raised class="colored">Add funds</paper-button>
       </div>
     </div>
-       <div>
-        <paper-button raised id="btnSave" class="colored">Save</paper-button>
-      </div>
     </div>
 	</core-header-panel>
   
   <script type="text/javascript">
 
+
+
+
       document.addEventListener('polymer-ready', function() {
+      
+      
+      var type = sessionStorage["type"];
+      if (type == "paypal")
+      {
+      var methods = document.getElementById('methods')
+        var newMethod = document.createElement('paper-radio-button');
+       newMethod.name = "paypal";
+        newMethod.label = "PayPal";
+        methods.appendChild(newMethod);        
+
+      }
 
 
-      document.getElementById('btnNew').addEventListener('click', function() {
-       window.location.href = "new-payment.html";
+      document.getElementById('btnNew').addEventListener('click', function() { 
+      
+
+      window.location.href = "new-payment.html";
+
       });
-
-      
-      
       
     });
   </script>
