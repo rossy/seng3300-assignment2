@@ -61,6 +61,29 @@ core-toolbar {
 	background: #fafafa;
 }
 
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+	display: none;
+}
+
+input:focus {
+	outline: none;
+}
+
+#search-input {
+	border-width: 0;
+	background-color: transparent;
+	font-size: 20px;
+}
+
+#back-button,
+#clear-button,
+#search-input {
+	color: #212121;
+}
+
 	</style>
 	<core-drawer-panel id="drawer-panel" flex>
 		<div drawer layout vertical>
@@ -72,10 +95,13 @@ core-toolbar {
 			</core-menu>
 		</div>
 		<core-header-panel main>
-			<core-toolbar>
+			<core-toolbar id="main-toolbar">
 				<paper-icon-button id="menu-button" icon="menu" on-tap="{{togglePanel}}"></paper-icon-button>
+				<paper-icon-button id="back-button" icon="arrow-back" on-tap="{{searchBack}}"></paper-icon-button>
 				<span id="directions-label" flex>Get directions</span>
-				<paper-icon-button id="search-button" icon="search" on-tap="{{toggleSearch}}"></paper-icon-button>
+				<input type="search" id="search-input" autocomplete="off" placeholder="Search places" on-input="{{searchInput}}">
+				<paper-icon-button id="search-button" icon="search" on-tap="{{startSearch}}"></paper-icon-button>
+				<paper-icon-button id="clear-button" icon="clear" on-tap="{{searchClear}}"></paper-icon-button>
 			</core-toolbar>
 			<google-map id="map"
 			            latitude="-32.8955255"
@@ -186,6 +212,9 @@ blah<br>
 
 	Polymer("directions-page", {
 		ready: function ready() {
+			this.$["back-button"].style.display = "none";
+			this.$["clear-button"].style.display = "none";
+			this.$["search-input"].style.display = "none";
 		},
 		menuSelected: function menuSelected(e, detail) {
 			if (!detail.isSelected)
@@ -203,8 +232,35 @@ blah<br>
 		togglePanel: function togglePanel() {
 			this.$["drawer-panel"].togglePanel();
 		},
-		toggleSearch: function toggleSearch() {
-
+		startSearch: function startSearch() {
+			this.$["back-button"].style.display = "";
+			this.$["search-input"].style.display = "";
+			this.$["clear-button"].style.display = "none";
+			this.$["search-button"].style.display = "none";
+			this.$["menu-button"].style.display = "none";
+			this.$["directions-label"].style.display = "none";
+			this.$["main-toolbar"].style.backgroundColor = "#F5F5F5";
+			this.$["search-input"].value = "";
+			this.$["search-input"].focus();
+		},
+		searchBack: function searchBack() {
+			this.$["back-button"].style.display = "none";
+			this.$["clear-button"].style.display = "none";
+			this.$["search-input"].style.display = "none";
+			this.$["search-button"].style.display = "";
+			this.$["menu-button"].style.display = "";
+			this.$["directions-label"].style.display = "";
+			this.$["main-toolbar"].style.backgroundColor = "";
+		},
+		searchInput: function searchInput() {
+			if (this.$["search-input"].value)
+				this.$["clear-button"].style.display = "";
+			else
+				this.$["clear-button"].style.display = "none";
+		},
+		searchClear: function searchClear() {
+			this.$["search-input"].value = "";
+			this.$["search-input"].focus();
 		},
 		mapReady: function mapReady() {
 			this.map = this.$["map"].map;
