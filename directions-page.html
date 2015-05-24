@@ -8,6 +8,7 @@
 <link rel="import" href="bower_components/core-icons/maps-icons.html">
 <link rel="import" href="bower_components/core-icons/editor-icons.html">
 <link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="bower_components/paper-ripple/paper-ripple.html">
 <link rel="import" href="bower_components/google-map/google-map.html">
 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 
@@ -82,6 +83,24 @@ input:focus {
 #clear-button,
 #search-input {
 	color: #212121;
+}
+
+#search-panel {
+	background: #F5F5F5;
+}
+
+.search-list-item {
+	border-bottom: 1px solid #BDBDBD;
+	padding: 12px 20px;
+	position: relative;
+}
+
+.search-list-item .search-list-name {
+	font-size: 20px;
+}
+
+.search-list-item .search-list-desc {
+	font-size: 14px;
 }
 
 	</style>
@@ -202,6 +221,8 @@ blah<br>
 					</div>
 				</paper-shadow>
 			</div>
+			<div id="search-panel" fit layout vertical>
+			</div>
 		</div>
 	</core-drawer-panel>
 </template>
@@ -210,11 +231,28 @@ blah<br>
 (function() {
 	"use strict";
 
+	function escapeRegExp(string) {
+		return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	}
+
 	Polymer("directions-page", {
 		ready: function ready() {
 			this.$["back-button"].style.display = "none";
 			this.$["clear-button"].style.display = "none";
 			this.$["search-input"].style.display = "none";
+			this.$["search-panel"].style.display = "none";
+			this.$["routes-panel"].style.display = "none";
+
+			this.places = [
+				{
+					name: "Pete's Printing Place",
+					desc: "Print shop",
+				},
+				{
+					name: "Bob's Video Rentals",
+					desc: "Video rental",
+				},
+			];
 		},
 		menuSelected: function menuSelected(e, detail) {
 			if (!detail.isSelected)
@@ -251,14 +289,71 @@ blah<br>
 			this.$["menu-button"].style.display = "";
 			this.$["directions-label"].style.display = "";
 			this.$["main-toolbar"].style.backgroundColor = "";
+			this.$["search-panel"].style.display = "none";
 		},
 		searchInput: function searchInput() {
-			if (this.$["search-input"].value)
+			var self = this;
+
+			if (this.$["search-input"].value) {
+				var searchPanel = this.$["search-panel"];
 				this.$["clear-button"].style.display = "";
-			else
+				searchPanel.style.display = "";
+
+				var regexes = this.$["search-input"].value.split(/\s+/).filter(function(str) {
+					return !!str;
+				}).map(function (str) {
+					return new RegExp(escapeRegExp(str), "gi");
+				});
+
+				this.places.filter(function(place) {
+					return !!place.elem;
+				}).forEach(function(place) {
+					searchPanel.removeChild(place.elem);
+					place.elem = null;
+				});
+
+				this.places.filter(function(place) {
+					return regexes.some(function (regex) {
+						return regex.test(place.name) || regex.test(place.desc);
+					});
+				}).forEach(function(place) {
+					function boldify(str) {
+						return regexes.reduce(function(str, regex) {
+							return str.replace(regex, "<b>$&</b>");
+						}, str);
+					}
+
+					place.elem = document.createElement("div");
+					place.elem.className = "search-list-item";
+
+					var nameDiv = document.createElement("div");
+					nameDiv.className = "search-list-name";
+					nameDiv.innerHTML = boldify(place.name);
+					place.elem.appendChild(nameDiv);
+
+					var descDiv = document.createElement("div");
+					descDiv.className = "search-list-desc";
+					descDiv.innerHTML = boldify(place.desc);
+					place.elem.appendChild(descDiv);
+
+					var ripple = document.createElement("paper-ripple");
+					ripple.setAttribute("fit", "fit");
+					place.elem.appendChild(ripple);
+
+					place.elem.addEventListener("click", function() {
+						self.searchBack();
+					}, false);
+
+					searchPanel.appendChild(place.elem);
+				});
+			} else {
 				this.$["clear-button"].style.display = "none";
+				this.$["search-panel"].style.display = "none";
+			}
 		},
 		searchClear: function searchClear() {
+			this.$["clear-button"].style.display = "none";
+			this.$["search-panel"].style.display = "none";
 			this.$["search-input"].value = "";
 			this.$["search-input"].focus();
 		},
