@@ -94,7 +94,7 @@ input:focus {
 
 .search-list-item {
 	border-bottom: 1px solid #BDBDBD;
-	padding: 12px 20px;
+	padding: 8px 20px;
 	position: relative;
 }
 
@@ -104,6 +104,23 @@ input:focus {
 
 .search-list-item .search-list-desc {
 	font-size: 14px;
+}
+
+.route {
+	position: relative;
+	font-size: 18px;
+	padding: 14px 20px;
+	line-height: 30px;
+	border-bottom: 1px solid #BDBDBD;
+}
+
+.route-number, .route-ticket-price {
+	display: inline-block;
+	width: 50%;
+}
+
+.route-ticket-price {
+	text-align: right;
 }
 
 	</style>
@@ -138,56 +155,30 @@ input:focus {
 				<div id="routes-close" on-click="{{closeRoutesPanel}}"></div>
 				<paper-shadow z="1">
 					<div id="routes-list">
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
+<div class="route">
+	<div class="route-number">123</div><div class="route-ticket-price">$2.50</div>
+	<div class="route-departure">Departs at 2:00pm</div>
+	<div class="route-eta"><b>ETA:</b> 2:20pm</div>
+	<paper-ripple fit></paper-ripple>
+</div>
+<div class="route">
+	<div class="route-number">123</div><div class="route-ticket-price">$2.50</div>
+	<div class="route-departure">Departs at 2:15pm</div>
+	<div class="route-eta"><b>ETA:</b> 2:35pm</div>
+	<paper-ripple fit></paper-ripple>
+</div>
+<div class="route">
+	<div class="route-number">123</div><div class="route-ticket-price">$2.50</div>
+	<div class="route-departure">Departs at 2:30pm</div>
+	<div class="route-eta"><b>ETA:</b> 2:50pm</div>
+	<paper-ripple fit></paper-ripple>
+</div>
+<div class="route">
+	<div class="route-number">123</div><div class="route-ticket-price">$2.50</div>
+	<div class="route-departure">Departs at 2:45pm</div>
+	<div class="route-eta"><b>ETA:</b> 3:05pm</div>
+	<paper-ripple fit></paper-ripple>
+</div>
 					</div>
 				</paper-shadow>
 			</div>
@@ -273,6 +264,8 @@ blah<br>
 			var self = this;
 
 			if (this.$["search-input"].value) {
+				this.closeRoutesPanel();
+
 				var searchPanel = this.$["search-panel"];
 				this.$["clear-button"].style.display = "";
 				searchPanel.style.display = "";
