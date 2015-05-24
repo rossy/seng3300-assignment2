@@ -1,169 +1,183 @@
 <!doctype html>
 <html>
 <head>
-	<meta name="theme-color" content="#999999">
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
-	<script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
-	<link rel="import" href="bower_components/font-roboto/roboto.html">
-	<link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
-	<link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
-	<link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
-	<link rel="import" href="bower_components/google-map/google-map.html">
-	<link rel="import" href="bower_components/core-icons/core-icons.html">
-	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-	  <link href="bower_components/paper-dropdown/paper-dropdown.html" rel="import">
-<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-<link href="bower_components/paper-item/paper-item.html" rel="import">
-<link rel="import" href="bower_components/core-menu/core-menu.html">
-<link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
-<link rel="import" href="bower_components/paper-button/paper-button.html">
-<link rel="import" href="bower_components/core-input/core-input.html">
-<link rel="import" href="bower_components/paper-input/paper-input.html">
-<link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+    <meta name="theme-color" content="#999999">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="bower_components/font-roboto/roboto.html">
+    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+    <link rel="import" href="bower_components/google-map/google-map.html">
+    <link rel="import" href="bower_components/core-icons/core-icons.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link href="bower_components/paper-dropdown/paper-dropdown.html" rel="import">
+    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link href="bower_components/paper-item/paper-item.html" rel="import">
+    <link rel="import" href="bower_components/core-menu/core-menu.html">
+    <link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/core-input/core-input.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
 
-  <style>
+    <style>
+        html, body {
+            height: 100vh;
+            margin: 0;
+            background-color: #E5E5E5;
+            font-family: 'RobotoDraft', sans-serif;
+        }
 
-html, body {
-	height: 100vh;
-	margin: 0;
-	background-color: #E5E5E5;
-	font-family: 'RobotoDraft', sans-serif;
-}
+        core-header-panel {
+            height: 100vh;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
 
-core-header-panel {
-	height: 100vh;
-	overflow: auto;
+        core-toolbar {
+            background: #03a9f4;
+            color: white;
+        }
 
-	-webkit-overflow-scrolling: touch;
-}
-
-core-toolbar {
-	background: #03a9f4;
-	color: white;
-}
-
-    .dropdown.colored::shadow #ripple,
-    .dropdown.colored::shadow #background {
-      border: 1px solid #0f9d58;
-      background-color: #b7e1cd;
-    }
-    
-    
-    paper-item {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+        .dropdown.colored::shadow #ripple,
+        .dropdown.colored::shadow #background {
+            border: 1px solid #0f9d58;
+            background-color: #b7e1cd;
+        }
 
 
-    section {
-      padding: 20px 0 ;
-    }
-    section > div {
-      padding: 14px;
-      font-size: 16px;
-    }
-
-    paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
-      color: #4285f4;
-    }
-    
-    paper-radio-group.blue paper-radio-button::shadow #onRadio {
-      background-color: #4285f4;
-    }
-
-    paper-radio-group.blue paper-radio-button[checked]::shadow #offRadio {
-      border-color: #4285f4;
-    }
-    
-    paper-radio-button {
-      display: block;
-    }
+        paper-item {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
 
 
-    paper-button.colored {
-      color: #4285f4;
-    }
+        section {
+            padding: 20px 0;
+        }
 
-    paper-button[raised].colored {
-      background: #4285f4;
-      color: #fff;
-    }
+            section > div {
+                padding: 14px;
+                font-size: 16px;
+            }
 
-    paper-button.custom > core-icon {
-      margin-right: 4px;
-    }
+        paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
+            color: #4285f4;
+        }
 
-    paper-button.hover:hover {
-      background: #eee;
-    }
+        paper-radio-group.blue paper-radio-button::shadow #onRadio {
+            background-color: #4285f4;
+        }
 
-    paper-button.blue-ripple::shadow #ripple {
-      color: #4285f4;
-    }
-	</style>
+        paper-radio-group.blue paper-radio-button[checked]::shadow #offRadio {
+            border-color: #4285f4;
+        }
+
+        paper-radio-button {
+            display: block;
+        }
+
+
+        paper-button.colored {
+            color: #4285f4;
+        }
+
+        paper-button[raised].colored {
+            background: #4285f4;
+            color: #fff;
+        }
+
+        paper-button.custom > core-icon {
+            margin-right: 4px;
+        }
+
+        paper-button.hover:hover {
+            background: #eee;
+        }
+
+        paper-button.blue-ripple::shadow #ripple {
+            color: #4285f4;
+        }
+
+        .pagecontent {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body unresolved>
-	<core-header-panel>
-			<core-toolbar id="mainheader">
-        <paper-icon-button id="navicon"  icon="arrow-back">	
-			</paper-icon-button>
-			  <span flex>Add Funds</span>
-			</core-toolbar>
-		<div id="divAdd" vertical layout>
-      <div>Balance<div id="balance"> $ 0</div></div>
-      <div>
-      	<paper-dropdown-menu label="Select an amount">
-            <paper-dropdown class="dropdown">
-              <core-menu class="menu">
-                  <paper-item>$ 20</paper-item>
-                  <paper-item>$ 40</paper-item>
-                  <paper-item>$ 60</paper-item>
-                  <paper-item>$ 80</paper-item>
-              </core-menu>
-            </paper-dropdown>
-          </paper-dropdown-menu>
-      </div>
-      <div>
-        <paper-radio-group class="blue" id="methods" selected="auto">
-           <paper-radio-button name="credit" label="Master Card ending with **994"></paper-radio-button>
-        </paper-radio-group></div>
-      </div>
-      <div>
-        <paper-button raised id="btnNew" class="colored">Add New Payment Method</paper-button>
-      </div>
-      <div>
-        <paper-button raised class="colored">Add funds</paper-button>
-      </div>
-    </div>
-    </div>
-	</core-header-panel>
-  
-  <script type="text/javascript">
+    <core-header-panel>
+        <core-toolbar id="mainheader">
+            <a href="index.html">
+                <paper-icon-button id="navicon" icon="arrow-back">
+                </paper-icon-button>
+            </a>
+            <span flex>Add Funds</span>
+        </core-toolbar>
+        <div class="pagecontent" id="divAdd" vertical justified layout>
+            <div>Balance<span id="balance"> $ 0</span></div>
+            <div>
+                <paper-dropdown-menu label="Select an amount">
+                    <paper-dropdown class="dropdown">
+                        <core-menu class="menu">
+                            <paper-item>$ 20</paper-item>
+                            <paper-item>$ 40</paper-item>
+                            <paper-item>$ 60</paper-item>
+                            <paper-item>$ 80</paper-item>
+                        </core-menu>
+                    </paper-dropdown>
+                </paper-dropdown-menu>
+            </div>
+            <div>
+                <paper-radio-group class="blue" id="methods" selected="auto">
+                    <paper-radio-button name="credit" label="Credit Card ending with ***94"></paper-radio-button>
+                </paper-radio-group>
+            </div>
+        </div>
+        <div vertical justified layout style=" padding:20px;">
+            <paper-button style="background-color:#0f9d58;" raised id="btnNew" class="colored">Add New Payment Method</paper-button>
+        </div>
+        <div vertical justified layout style=" padding:20px;">
+            <paper-button raised class="colored">Add funds</paper-button>
+        </div>
 
 
+    </core-header-panel>
 
+    <script type="text/javascript">
 
-      document.addEventListener('polymer-ready', function() {
-      
-      
-      var type = sessionStorage["type"];
-      if (type == "paypal")
-      {
-        var methods = document.getElementById('methods')
-        var newMethod = document.createElement('paper-radio-button');
-        newMethod.name = "paypal";
-        newMethod.label = "PayPal";
-        methods.appendChild(newMethod);        
+        document.addEventListener('polymer-ready', function () {
 
-      }
+            var type = sessionStorage["type"];
+            if (type == "paypal") {
+                var methods = document.getElementById('methods')
+                var newMethod = document.createElement('paper-radio-button');
+                if (!(sessionStorage["username"] === undefined)) {
+                    var username = sessionStorage["username"].toString();
+                    newMethod.name = "paypal";
+                    newMethod.label = "PayPal account with username " + username;
+                    methods.appendChild(newMethod);
+                }
+            }
+            else if (type == "credit") {
+                var methods = document.getElementById('methods')
+                var newMethod = document.createElement('paper-radio-button');
+                if (!(sessionStorage["number"] === undefined)) {
 
-      document.getElementById('btnNew').addEventListener('click', function() { 
-      window.location.href = "new-payment.html";
+                    var number = sessionStorage["number"].toString();
+                    newMethod.name = "credit";
+                    newMethod.lable = "Credit Card ending with ***" + number.substring(number.length - 3, number.length - 1);
+                    methods.appendChild(newMethod);
+                }
+            }
 
-      });
-      
-    });
-  </script>
+            document.getElementById('btnNew').addEventListener('click', function () {
+                window.location.href = "new-payment.html";
+
+            });
+
+        });
+    </script>
 </body>
 </html>
