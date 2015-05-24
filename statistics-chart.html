@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="theme-color" content="#999999">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="bower_components/font-roboto/roboto.html">
+    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+    <link rel="import" href="bower_components/google-map/google-map.html">
+    <link rel="import" href="bower_components/core-icons/core-icons.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link href="bower_components/paper-dropdown/paper-dropdown.html" rel="import">
+    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link href="bower_components/paper-item/paper-item.html" rel="import">
+    <link rel="import" href="bower_components/core-menu/core-menu.html">
+    <link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/core-input/core-input.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/core-icons/core-icons.html">
+    <link rel="import" href="bower_components/core-icons/maps-icons.html">
+    <link rel="import" href="bower_components/core-icons/editor-icons.html">
+
+    <style>
+        html, body {
+            height: 100vh;
+            margin: 0;
+            background-color: #E5E5E5;
+            font-family: 'RobotoDraft', sans-serif;
+        }
+
+        core-header-panel {
+            height: 100vh;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        core-toolbar {
+            background: #03a9f4;
+            color: white;
+        }
+
+        .dropdown.colored::shadow #ripple,
+        .dropdown.colored::shadow #background {
+            border: 1px solid #0f9d58;
+            background-color: #b7e1cd;
+        }
+
+
+        paper-item {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+
+        section {
+            padding: 20px 0;
+        }
+
+            section > div {
+                padding: 14px;
+                font-size: 16px;
+            }
+
+        paper-radio-group.blue paper-radio-button::shadow #ink[checked] {
+            color: #4285f4;
+        }
+
+        paper-radio-group.blue paper-radio-button::shadow #onRadio {
+            background-color: #4285f4;
+        }
+
+        paper-radio-group.blue paper-radio-button[checked]::shadow #offRadio {
+            border-color: #4285f4;
+        }
+
+        paper-radio-button {
+            display: block;
+        }
+
+
+        paper-button.colored {
+            color: #4285f4;
+        }
+
+        paper-button[raised].colored {
+            background: #4285f4;
+            color: #fff;
+        }
+
+        paper-button.custom > core-icon {
+            margin-right: 4px;
+        }
+
+        paper-button.hover:hover {
+            background: #eee;
+        }
+
+        paper-button.blue-ripple::shadow #ripple {
+            color: #4285f4;
+        }
+
+        .statbuttons {
+            text-align: center;
+            margin: 20px;
+            padding: 60px 20px;
+            border-radius: 20px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body unresolved>
+    <core-header-panel>
+        <core-toolbar id="mainheader">
+            <a href="statistics.html">
+                <paper-icon-button id="navicon" icon="arrow-back">
+                </paper-icon-button>
+            </a>
+            <span flex>Global Statistics</span>
+        </core-toolbar>
+        <div vertical layout center>
+            <div horizontal layout center>
+               
+            </div>
+        </div>
+
+    </core-header-panel>
+
+
+    <script type="text/javascript">
+
+        document.addEventListener('polymer-ready', function () {
+
+        });
+    </script>
+</body>
+</html>
