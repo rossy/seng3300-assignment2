@@ -155,25 +155,25 @@ input:focus {
 				<div id="routes-close" on-click="{{closeRoutesPanel}}"></div>
 				<paper-shadow z="1">
 					<div id="routes-list">
-<div class="route">
+<div class="route" on-tap="routeTapped">
 	<div class="route-number">123</div><div class="route-ticket-price">$2.50</div>
 	<div class="route-departure">Departs at 2:00pm</div>
 	<div class="route-eta"><b>ETA:</b> 2:20pm</div>
 	<paper-ripple fit></paper-ripple>
 </div>
-<div class="route">
+<div class="route" on-tap="routeTapped">
 	<div class="route-number">123</div><div class="route-ticket-price">$2.50</div>
 	<div class="route-departure">Departs at 2:15pm</div>
 	<div class="route-eta"><b>ETA:</b> 2:35pm</div>
 	<paper-ripple fit></paper-ripple>
 </div>
-<div class="route">
+<div class="route" on-tap="routeTapped">
 	<div class="route-number">123</div><div class="route-ticket-price">$2.50</div>
 	<div class="route-departure">Departs at 2:30pm</div>
 	<div class="route-eta"><b>ETA:</b> 2:50pm</div>
 	<paper-ripple fit></paper-ripple>
 </div>
-<div class="route">
+<div class="route" on-tap="routeTapped">
 	<div class="route-number">123</div><div class="route-ticket-price">$2.50</div>
 	<div class="route-departure">Departs at 2:45pm</div>
 	<div class="route-eta"><b>ETA:</b> 3:05pm</div>
@@ -338,6 +338,9 @@ input:focus {
 			this.$["map"].style.height = "";
 			google.maps.event.trigger(this.map, "resize");
 			this.$["routes-panel"].style.display = "none";
+		},
+		routeTapped: function routeTapped() {
+			this.closeRoutesPanel();
 		},
 		mapReady: function mapReady() {
 			var self = this;
