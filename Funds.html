@@ -153,8 +153,10 @@
             if (type == "paypal") {
                 var methods = document.getElementById('methods')
                 var newMethod = document.createElement('paper-radio-button');
-                if (!(sessionStorage["username"] === undefined)) {
-                    var username = sessionStorage["username"].toString();
+                if (!(sessionStorage["data"] === undefined)) {
+                 //          debugger;
+                    
+                    var username = sessionStorage["data"].toString();
                     newMethod.name = "paypal";
                     newMethod.label = "PayPal account with username " + username;
                     methods.appendChild(newMethod);
@@ -163,11 +165,12 @@
             else if (type == "credit") {
                 var methods = document.getElementById('methods')
                 var newMethod = document.createElement('paper-radio-button');
-                if (!(sessionStorage["number"] === undefined)) {
-
-                    var number = sessionStorage["number"].toString();
+                if (!(sessionStorage["data"] === undefined)) {
+                   // debugger;
+                    var number = sessionStorage["data"].toString();
                     newMethod.name = "credit";
-                    newMethod.lable = "Credit Card ending with ***" + number.substring(number.length - 3, number.length - 1);
+                    //newMethod.lable = "Credit Card ending with ***" + number.substring(number.length - 3, number.length - 1);
+                    newMethod.lable = "Credit Card ending with ***" + number;
                     methods.appendChild(newMethod);
                 }
             }

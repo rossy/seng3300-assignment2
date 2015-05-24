@@ -215,13 +215,13 @@
             document.getElementById('btnSavePaypal').addEventListener('click', function () {
                 sessionStorage["type"] = "paypal";
                 window.location.href = "Funds.html";
-                sessionStorage["number"] = document.getElementById('cardnumber');
+                sessionStorage["data"] = document.getElementById('username').value;
             });
 
             document.getElementById('btnSaveCredit').addEventListener('click', function () {
                 sessionStorage["type"] = "credit";
                 window.location.href = "Funds.html";
-                sessionStorage["username"] = document.getElementById('username');
+                sessionStorage["data"] = document.getElementById('cardnumber').value;
 
             });
 
