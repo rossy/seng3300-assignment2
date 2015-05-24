@@ -50,7 +50,10 @@ core-toolbar {
 
 #routes-panel {
 	overflow: auto;
-	padding-top: 60vh;
+}
+
+#routes-close {
+	height: 45vh;
 }
 
 #routes-panel::-webkit-scrollbar {
@@ -125,49 +128,16 @@ input:focus {
 			<google-map id="map"
 			            latitude="-32.8955255"
 			            longitude="151.6944619"
-			            zoom="14"
+			            zoom="13"
 			            disableDefaultUI
 			            noAutoTilt
 			            on-google-map-ready="{{mapReady}}"
 			            fit>
 			</google-map>
-			<div id="routes-panel" fit layout vertical>
+			<div id="routes-panel" fit>
+				<div id="routes-close" on-click="{{closeRoutesPanel}}"></div>
 				<paper-shadow z="1">
 					<div id="routes-list">
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
-blah<br>
 blah<br>
 blah<br>
 blah<br>
@@ -247,10 +217,14 @@ blah<br>
 				{
 					name: "Pete's Printing Place",
 					desc: "Print shop",
+					icon: "ic_print_black_48dp.png",
+					pos: [-32.901727, 151.691132],
 				},
 				{
-					name: "Bob's Video Rentals",
-					desc: "Video rental",
+					name: "Rachael's Restaurant",
+					desc: "Restaurant",
+					icon: "ic_restaurant_menu_black_48dp.png",
+					pos: [-32.902718, 151.682162],
 				},
 			];
 		},
@@ -346,6 +320,7 @@ blah<br>
 
 					place.elem.addEventListener("click", function() {
 						self.searchBack();
+						place.focus();
 					}, false);
 
 					searchPanel.appendChild(place.elem);
@@ -361,9 +336,20 @@ blah<br>
 			this.$["search-input"].value = "";
 			this.$["search-input"].focus();
 		},
-		mapReady: function mapReady() {
-			this.map = this.$["map"].map;
+		closeRoutesPanel: function closeRoutesPanel() {
+			if (this.currentInfowindow) {
+				this.currentInfowindow.close();
+				this.currentInfowindow = null;
+			}
 
+			this.$["map"].style.height = "";
+			google.maps.event.trigger(this.map, "resize");
+			this.$["routes-panel"].style.display = "none";
+		},
+		mapReady: function mapReady() {
+			var self = this;
+			var map = this.map = this.$["map"].map;
+/*
 			var pathCoords = [
 				new google.maps.LatLng(-32.902948, 151.676802),
 				new google.maps.LatLng(-32.905002, 151.691029),
@@ -381,6 +367,48 @@ blah<br>
 			});
 
 			path.setMap(this.map);
+*/
+
+			this.places.forEach(function(place) {
+				var latlng = new google.maps.LatLng(place.pos[0], place.pos[1]);
+
+				var marker = new google.maps.Marker({
+					position: latlng,
+					map: map,
+					title: place.name,
+					icon: {
+						url: place.icon,
+						size: new google.maps.Size(48, 48),
+						scaledSize: new google.maps.Size(48, 48),
+					},
+				});
+
+				var infowindow = new google.maps.InfoWindow({
+					content: "<b>" + place.name + "</b><br>" + place.desc,
+				});
+
+				google.maps.event.addListener(infowindow, "closeclick", function() {
+					self.closeRoutesPanel();
+				});
+
+				place.focus = function() {
+					self.$["map"].style.height = "45vh";
+					google.maps.event.trigger(map, "resize");
+					self.$["routes-panel"].style.display = "";
+
+					map.setZoom(13);
+					map.panTo(latlng);
+
+					if (self.currentInfowindow)
+						self.currentInfowindow.close();
+					infowindow.open(map, marker);
+					self.currentInfowindow = infowindow;
+				}
+
+				google.maps.event.addListener(marker, "click", function() {
+					place.focus();
+				});
+			});
 		},
 	});
 })();
