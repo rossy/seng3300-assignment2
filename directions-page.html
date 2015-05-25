@@ -114,6 +114,14 @@ input:focus {
 	border-bottom: 1px solid #BDBDBD;
 }
 
+#route-pane {
+
+	position: relative;
+	font-size: 18px;
+	padding: 14px 20px;
+	line-height: 30px;
+}
+
 .route-number, .route-ticket-price {
 	display: inline-block;
 	width: 50%;
@@ -121,6 +129,16 @@ input:focus {
 
 .route-ticket-price {
 	text-align: right;
+}
+
+.route-info {
+	font-size: 14px;
+	line-height: 16px;
+	margin: 6px 0;
+}
+
+.route-co2 {
+	  margin-top: -6px;
 }
 
 	</style>
@@ -151,6 +169,7 @@ input:focus {
 			            on-google-map-ready="{{mapReady}}"
 			            fit>
 			</google-map>
+
 			<div id="routes-panel" fit>
 				<div id="routes-close" on-click="{{closeRoutesPanel}}"></div>
 				<paper-shadow z="1">
@@ -182,6 +201,21 @@ input:focus {
 					</div>
 				</paper-shadow>
 			</div>
+
+			<div id="route-panel" fit layout vertical>
+				<div id="route-close" on-click="{{closeRoutePanel}}" flex></div>
+				<paper-shadow z="1">
+					<div id="route-pane">
+<div class="route-number">123</div><div class="route-ticket-price">$2.50</div>
+<div class="route-departure">Departs at 2:45pm</div>
+<div class="route-eta"><b>ETA:</b> 3:05pm</div>
+<div class="route-co2"><img src="leaf.png" style="width: 18px; height: 18px; margin: -18px 0; vertical-align: middle"> 100g CO<sup>2</sup> emissions saved</div>
+<div class="route-money">$3.00 saved</div>
+<div class="route-info">Compared to an equivalent trip by car, including parking fees for 2 hours</div>
+					</div>
+				</paper-shadow>
+			</div>
+
 			<div id="search-panel" fit layout vertical>
 			</div>
 		</div>
@@ -203,6 +237,7 @@ input:focus {
 			this.$["search-input"].style.display = "none";
 			this.$["search-panel"].style.display = "none";
 			this.$["routes-panel"].style.display = "none";
+			this.$["route-panel"].style.display = "none";
 
 			this.places = [
 				{
@@ -339,8 +374,20 @@ input:focus {
 			google.maps.event.trigger(this.map, "resize");
 			this.$["routes-panel"].style.display = "none";
 		},
+		closeRoutePanel: function closeRoutesPanel() {
+			this.$["map"].style.height = "";
+			google.maps.event.trigger(this.map, "resize");
+			this.$["route-panel"].style.display = "none";
+		},
 		routeTapped: function routeTapped() {
 			this.closeRoutesPanel();
+			this.$["route-panel"].style.display = "";
+
+			this.$["map"].style.height = this.$["map"].getBoundingClientRect().height - this.$["route-pane"].getBoundingClientRect().height + "px";
+			google.maps.event.trigger(this.map, "resize");
+
+			this.map.setZoom(16);
+			this.map.panTo(this.currentPlace.latlng);
 		},
 		mapReady: function mapReady() {
 			var self = this;
@@ -365,8 +412,19 @@ input:focus {
 			path.setMap(this.map);
 */
 
+			var start = self.start = new google.maps.LatLng(-32.8955255, 151.6944619);
+			var startMarker = new google.maps.Marker({
+				position: start,
+				map: map,
+				icon: {
+					url: "current-location.png",
+					size: new google.maps.Size(32, 32),
+					scaledSize: new google.maps.Size(32, 32),
+				},
+			});
+
 			this.places.forEach(function(place) {
-				var latlng = new google.maps.LatLng(place.pos[0], place.pos[1]);
+				var latlng = place.latlng = new google.maps.LatLng(place.pos[0], place.pos[1]);
 
 				var marker = new google.maps.Marker({
 					position: latlng,
@@ -394,6 +452,7 @@ input:focus {
 
 					map.setZoom(13);
 					map.panTo(latlng);
+						self.currentPlace = place;
 
 					if (self.currentInfowindow)
 						self.currentInfowindow.close();
