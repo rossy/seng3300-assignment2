@@ -121,7 +121,7 @@
         </core-toolbar>
 
         <div class="pagecontent" id="divNew" vertical layout justified>
-            <div>
+            <div vertical layout justified >
                 <paper-dropdown-menu label="Payment type">
                     <paper-dropdown class="dropdown">
                         <core-menu class="menu">
@@ -132,11 +132,14 @@
                 </paper-dropdown-menu>
             </div>
             <div id="divPaypal" hidden="hidden">
-                <div>
+                <div  vertical layout justified>
                     <paper-input label="Username" id="username" floatinglabel></paper-input>
                 </div>
-                <div>
-                    <paper-input label="Password" floatinglabel></paper-input>
+                <div vertical layout justified>
+                  
+                        <paper-input-decorator label="Password" floatingLabel>
+      <input type="password" is="core-input">
+    </paper-input-decorator>
                 </div>
                 <div vertical justified layout style=" padding:20px;">
                     <paper-button raised id="btnSavePaypal" class="colored">Save</paper-button>
@@ -144,13 +147,13 @@
             </div>
             <div id="divCredit" hidden="hidden">
 
-                <div>
+                <div vertical layout justified>
                     <paper-input label="Name" floatinglabel></paper-input>
                 </div>
-                <div>
+                <div vertical layout justified>
                     <paper-input label="Card Number" id="cardnumber" floatinglabel></paper-input>
                 </div>
-                <div>
+                <div vertical layout justified>
                     <paper-dropdown-menu label="Expiry Month">
                         <paper-dropdown class="dropdown">
                             <core-menu class="menu">
@@ -183,7 +186,7 @@
                         </paper-dropdown>
                     </paper-dropdown-menu>
                 </div>
-                <div>
+                <div vertical layout justified>
                     <paper-input label="Security Code" floatinglabel></paper-input>
                 </div>
                
