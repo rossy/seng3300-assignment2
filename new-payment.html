@@ -120,7 +120,7 @@
             <span flex>New Payment Method</span>
         </core-toolbar>
 
-        <div class="pagecontent" id="divNew" vertical layout>
+        <div class="pagecontent" id="divNew" vertical layout justified>
             <div>
                 <paper-dropdown-menu label="Payment type">
                     <paper-dropdown class="dropdown">
@@ -186,9 +186,7 @@
                 <div>
                     <paper-input label="Security Code" floatinglabel></paper-input>
                 </div>
-                <paper-input-decorator label="required" floatinglabel error="input is required!" autovalidate>
-                    <input is="core-input" required>
-                </paper-input-decorator>
+               
                 <div vertical justified layout style=" padding:20px;">
                     <paper-button raised id="btnSaveCredit" class="colored">Save</paper-button>
                 </div>
