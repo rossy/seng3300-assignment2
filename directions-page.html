@@ -161,8 +161,8 @@ input:focus {
 				<paper-icon-button id="clear-button" icon="clear" on-tap="{{searchClear}}"></paper-icon-button>
 			</core-toolbar>
 			<google-map id="map"
-			            latitude="-32.8955255"
-			            longitude="151.6944619"
+			            latitude="-33.896270"
+			            longitude="151.162518"
 			            zoom="13"
 			            disableDefaultUI
 			            noAutoTilt
@@ -244,14 +244,26 @@ input:focus {
 					name: "Pete's Printing Place",
 					desc: "Print shop",
 					icon: "ic_print_black_48dp.png",
-					pos: [-32.901727, 151.691132],
+					pos: [-33.911470, 151.158270],
 				},
 				{
 					name: "Rachael's Restaurant",
 					desc: "Restaurant",
 					icon: "ic_restaurant_menu_black_48dp.png",
-					pos: [-32.902718, 151.682162],
+					pos: [-33.887925, 151.159300],
 				},
+				{
+					name: "Paul's Pizza",
+					desc: "Restaurant",
+					icon: "ic_local_pizza_black_48dp.png",
+					pos: [-33.902691, 151.164771],
+				},
+				{
+					name: "Lillyfield Library",
+					desc: "Public library",
+					icon: "ic_local_library_black_48dp.png",
+					pos: [-33.872053, 151.171638],
+				}
 			];
 		},
 		menuSelected: function menuSelected(e, detail) {
@@ -374,10 +386,17 @@ input:focus {
 			google.maps.event.trigger(this.map, "resize");
 			this.$["routes-panel"].style.display = "none";
 		},
-		closeRoutePanel: function closeRoutesPanel() {
+		closeRoutePanel: function closeRoutePanel() {
 			this.$["map"].style.height = "";
 			google.maps.event.trigger(this.map, "resize");
 			this.$["route-panel"].style.display = "none";
+
+			this.map.setZoom(13);
+
+			if (this.path) {
+				this.path.setMap(null);
+				this.path = null;
+			}
 		},
 		routeTapped: function routeTapped() {
 			this.closeRoutesPanel();
@@ -387,32 +406,36 @@ input:focus {
 			google.maps.event.trigger(this.map, "resize");
 
 			this.map.setZoom(16);
-			this.map.panTo(this.currentPlace.latlng);
-		},
-		mapReady: function mapReady() {
-			var self = this;
-			var map = this.map = this.$["map"].map;
-/*
+			this.map.panTo(this.start);
+
 			var pathCoords = [
-				new google.maps.LatLng(-32.902948, 151.676802),
-				new google.maps.LatLng(-32.905002, 151.691029),
-				new google.maps.LatLng(-32.905741, 151.692209),
-				new google.maps.LatLng(-32.901381, 151.693604),
-				new google.maps.LatLng(-32.892841, 151.695599),
+				new google.maps.LatLng(-33.896057, 151.158074),
+				new google.maps.LatLng(-33.896567, 151.159777),
+				new google.maps.LatLng(-33.896616, 151.160120),
+				new google.maps.LatLng(-33.896486, 151.160778),
+				new google.maps.LatLng(-33.896219, 151.161518),
+				new google.maps.LatLng(-33.896181, 151.162237),
+				new google.maps.LatLng(-33.896397, 151.162902),
+				new google.maps.LatLng(-33.896800, 151.163961),
+				new google.maps.LatLng(-33.899494, 151.170906),
 			];
 
 			var path = new google.maps.Polyline({
 				path: pathCoords,
 				geodesic: true,
-				strokeColor: '#2962FF',
-				strokeOpacity: 0.9,
-				strokeWeight: 4,
+				strokeColor: '#00ccff',
+				strokeOpacity: 1.0,
+				strokeWeight: 10,
 			});
 
 			path.setMap(this.map);
-*/
+			this.path = path;
+		},
+		mapReady: function mapReady() {
+			var self = this;
+			var map = this.map = this.$["map"].map;
 
-			var start = self.start = new google.maps.LatLng(-32.8955255, 151.6944619);
+			var start = self.start = new google.maps.LatLng(-33.896270, 151.162518);
 			var startMarker = new google.maps.Marker({
 				position: start,
 				map: map,
