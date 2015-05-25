@@ -20,6 +20,8 @@
     <link rel="import" href="bower_components/core-input/core-input.html">
     <link rel="import" href="bower_components/paper-input/paper-input.html">
     <link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-action-dialog.html">
 
     <style>
         html, body {
@@ -104,6 +106,9 @@
         .pagecontent {
             padding: 20px;
         }
+                a {
+            color:#fff;
+        }
     </style>
 </head>
 <body unresolved>
@@ -116,16 +121,16 @@
             <span flex>Add Funds</span>
         </core-toolbar>
         <div class="pagecontent" id="divAdd" vertical justified layout>
-            <div>Balance<span id="balance"> $ 0</span></div>
-            <div>
-                <paper-dropdown-menu label="Select an amount">
+            <div>Balance <span id="balance">$ 0</span></div>
+            <div vertical justified layout>
+                <paper-dropdown-menu  id="amount" label="Select an amount">
                     <paper-dropdown class="dropdown">
                         <core-menu class="menu">
                             <paper-item>$ 20</paper-item>
                             <paper-item>$ 40</paper-item>
                             <paper-item>$ 60</paper-item>
                             <paper-item>$ 80</paper-item>
-                        </core-menu>
+                            </core-menuvertical>
                     </paper-dropdown>
                 </paper-dropdown-menu>
             </div>
@@ -139,13 +144,55 @@
             <paper-button style="background-color:#0f9d58;" raised id="btnNew" class="colored">Add New Payment Method</paper-button>
         </div>
         <div vertical justified layout style=" padding:20px;">
-            <paper-button raised class="colored">Add funds</paper-button>
-        </div>
+            <template is="auto-binding">
+                <section on-tap="{{toggleDialog1}}">
+                    <paper-button vertical justified layout id="addfunds" raised class="colored">Add funds</paper-button>
+                    
 
+                    <paper-action-dialog heading="Confirmation">
+                        <p>Are you sure you want to add funds to your account?</p>
+                        <paper-button on-tap="{{confirm}}" affirmative>Yes</paper-button>
+                        <paper-button affirmative autofocus>No</paper-button>
+                    </paper-action-dialog>
+
+</div>
+        </section>
+        </template>
 
     </core-header-panel>
 
     <script type="text/javascript">
+
+
+        var scope = document.querySelector('template[is=auto-binding]');
+
+        scope.toggleDialog1 = function (e) {
+            //alert(e.target.id);
+            //if (e.target.id != 'addfunds') {
+              //  return;
+            //}
+            var d = e.target.nextElementSibling;
+            if (!d) {
+                return;
+            }
+            d.toggle();
+        };
+
+        scope.confirm = function (e) {
+
+            document.getElementById('balance').textContent = document.getElementById('amount').selectedItemLabel;
+        };
+
+        scope.transitions = [
+          'core-transition-center',
+          'core-transition-top',
+          'core-transition-bottom',
+          'core-transition-left',
+          'core-transition-right'
+        ];
+
+       
+
 
         document.addEventListener('polymer-ready', function () {
 
@@ -179,6 +226,7 @@
                 window.location.href = "new-payment.html";
 
             });
+
 
         });
     </script>

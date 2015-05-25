@@ -110,6 +110,9 @@
             border-radius: 20px;
             background-color: #fff;
         }
+                a {
+            color:#fff;
+        }
     </style>
 </head>
 <body unresolved>
@@ -119,12 +122,32 @@
                 <paper-icon-button id="navicon" icon="arrow-back">
                 </paper-icon-button>
             </a>
-            <span flex>Statistics on the map</span>
+            <span flex>Global Statistics</span>
         </core-toolbar>
-        <div vertical layout center>
-            <div horizontal layout center>
-               
+        <div style="padding:20px;" vertical justified layout>
+            <div vertical justified layout>
+                <paper-dropdown-menu label="Select an amount">
+                    <paper-dropdown class="dropdown">
+                        <core-menu selected="0" class="menu">
+                            <paper-item id="weekly">Weekly</paper-item>
+                            <paper-item id="monthly">Monthly</paper-item>
+                        </core-menu>
+                    </paper-dropdown>
+                </paper-dropdown-menu>
             </div>
+            <div vertical justified layout>
+                <paper-dropdown-menu label="Select an amount">
+                    <paper-dropdown class="dropdown">
+                        <core-menu selected="0" class="menu">
+                            <paper-item>Fuel Saved</paper-item>
+                            <paper-item>Passengers</paper-item>
+                            <paper-item>Carbon Emissions Saved</paper-item>
+                        </core-menu>
+                    </paper-dropdown>
+                </paper-dropdown-menu>
+            </div>
+            <img id="img1" src="map1.jpg" />
+            <!--<img id="img2" hidden="hidden" src="chart2.jpg" />-->
         </div>
 
     </core-header-panel>
@@ -132,10 +155,21 @@
 
     <script type="text/javascript">
 
-        document.addEventListener('polymer-ready', function () {
 
-    
+        document.addEventListener('polymer-ready', function () {
+            //document.getElementById('weekly').addEventListener('click', function () {
+            //    document.getElementById('img1').hidden = "";
+            //    document.getElementById('img2').hidden = "hidden";
+
+            //});
+            //document.getElementById('monthly').addEventListener('click', function () {
+            //    document.getElementById('img1').hidden = "hidden";
+            //    document.getElementById('img2').hidden = "";
+
+            //});
+
         });
     </script>
+
 </body>
 </html>
