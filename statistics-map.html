@@ -147,7 +147,7 @@
                 </paper-dropdown-menu>
             </div>
             <img id="img1" src="map1.jpg" />
-            <!--<img id="img2" hidden="hidden" src="chart2.jpg" />-->
+            <img id="img2" hidden="hidden" src="map2.jpg" />
         </div>
 
     </core-header-panel>
@@ -157,16 +157,16 @@
 
 
         document.addEventListener('polymer-ready', function () {
-            //document.getElementById('weekly').addEventListener('click', function () {
-            //    document.getElementById('img1').hidden = "";
-            //    document.getElementById('img2').hidden = "hidden";
+            document.getElementById('weekly').addEventListener('click', function () {
+                document.getElementById('img1').hidden = "";
+                document.getElementById('img2').hidden = "hidden";
 
-            //});
-            //document.getElementById('monthly').addEventListener('click', function () {
-            //    document.getElementById('img1').hidden = "hidden";
-            //    document.getElementById('img2').hidden = "";
+            });
+            document.getElementById('monthly').addEventListener('click', function () {
+                document.getElementById('img1').hidden = "hidden";
+                document.getElementById('img2').hidden = "";
 
-            //});
+            });
 
         });
     </script>
